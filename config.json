@@ -4,5 +4,6 @@
   "videos": "/videos.html",
   "notebook": "/notebook.html",
   "instrumentals": "/instrumentals.html",
+  "reality": "/reality/",
   "outputDirectory": "result"
 }

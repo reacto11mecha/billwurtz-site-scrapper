@@ -1,4 +1,10 @@
-const { videos, songs, notebook, instrumentals } = require("./scrapper");
+const {
+  videos,
+  songs,
+  notebook,
+  instrumentals,
+  reality,
+} = require("./scrapper");
 const { jsonFormatter } = require("./utils");
 const Listr = require("listr");
 const path = require("path");
@@ -79,6 +85,23 @@ module.exports = ({ outputDir }) =>
               instrumentalJson
             ),
           ]).then(() => Promise.resolve("Instrumentals File Writed"));
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      },
+    },
+    {
+      title: "Scrapping Reality",
+      task: async (ctx) => {
+        try {
+          const realityList = await reality();
+          const realityJson = jsonFormatter(realityList);
+
+          ctx.reality = realityList;
+
+          return Promise.all([
+            fs.writeFileSync(path.join(outputDir, "reality.json"), realityJson),
+          ]).then(() => Promise.resolve("Reality File Writed"));
         } catch (e) {
           return Promise.reject(e);
         }
