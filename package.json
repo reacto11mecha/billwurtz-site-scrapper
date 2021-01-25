@@ -4,7 +4,7 @@
   "description": "billwurtz web scrapper",
   "main": "automate.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "automate": "node automate.js"
   },
   "repository": {
     "type": "git",
