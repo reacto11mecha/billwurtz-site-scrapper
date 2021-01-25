@@ -1,5 +1,6 @@
 const config = require("./config.json");
 const { videos, songs } = require("./scrapper");
+const { jsonFormatter } = require("./utils");
 const path = require("path");
 const fs = require("fs");
 
@@ -10,11 +11,13 @@ if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
   const songList = await songs();
   const videoList = await videos();
 
-  const all = JSON.stringify({ song: songList, video: videoList }, null, 2);
-  const songsJson = JSON.stringify(songList, null, 2);
-  const videoJson = JSON.stringify(videoList, null, 2);
+  const all = jsonFormatter({ song: songList, video: videoList });
+  const songsJson = jsonFormatter(songList);
+  const videoJson = jsonFormatter(videoList);
 
-  fs.writeFileSync(path.join(outputDir, "all.json"), all);
-  fs.writeFileSync(path.join(outputDir, "songs.json"), songsJson);
-  fs.writeFileSync(path.join(outputDir, "videos.json"), videoJson);
+  Promise.all([
+    fs.writeFileSync(path.join(outputDir, "all.json"), all),
+    fs.writeFileSync(path.join(outputDir, "songs.json"), songsJson),
+    fs.writeFileSync(path.join(outputDir, "videos.json"), videoJson),
+  ]).then(() => console.log("File writed"));
 })();
