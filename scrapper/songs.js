@@ -19,21 +19,19 @@ module.exports = async () => {
           const duration = $(this).find("td:nth-child(2)").text();
 
           const durationSplit = duration.split("(");
+          const lastIndex = String(durationSplit[durationSplit.length - 1]);
 
           return {
             title: anchor.text(),
             link: config.origin + "/" + anchor.attr("href"),
-            released,
-            duration: String(durationSplit[durationSplit.length - 1]).replace(
-              ")",
-              ""
-            ),
+            released: released.replace("\n", ""),
+            duration: lastIndex.replace(")", ""),
           };
         }
       }),
     ];
 
-    return data;
+    return data.filter((song) => song.title !== "");
   } catch (e) {
     console.log(e);
   }
