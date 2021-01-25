@@ -1,4 +1,4 @@
-const { videos, songs, notebook } = require("./scrapper");
+const { videos, songs, notebook, instrumentals } = require("./scrapper");
 const { jsonFormatter } = require("./utils");
 const Listr = require("listr");
 const path = require("path");
@@ -59,6 +59,26 @@ module.exports = ({ outputDir }) =>
           return Promise.all([
             fs.writeFileSync(path.join(outputDir, "notebook.json"), noteJson),
           ]).then(() => Promise.resolve("Video File Writed"));
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      },
+    },
+    {
+      title: "Scrapping Instrumentals",
+      task: async (ctx) => {
+        try {
+          const instrumentalList = await instrumentals();
+          const instrumentalJson = jsonFormatter(instrumentalList);
+
+          ctx.instrumentals = instrumentalList;
+
+          return Promise.all([
+            fs.writeFileSync(
+              path.join(outputDir, "instrumentals.json"),
+              instrumentalJson
+            ),
+          ]).then(() => Promise.resolve("Instrumentals File Writed"));
         } catch (e) {
           return Promise.reject(e);
         }

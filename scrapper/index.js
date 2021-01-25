@@ -1,5 +1,6 @@
 const songs = require("./songs");
 const videos = require("./videos");
 const notebook = require("./notebook");
+const instrumentals = require("./instrumentals");
 
-module.exports = { songs, videos, notebook };
+module.exports = { songs, videos, notebook, instrumentals };
