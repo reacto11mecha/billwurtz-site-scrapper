@@ -4,6 +4,7 @@ const {
   notebook,
   instrumentals,
   reality,
+  expert,
 } = require("./scrapper");
 const { jsonFormatter } = require("./utils");
 const Listr = require("listr");
@@ -102,6 +103,23 @@ module.exports = ({ outputDir }) =>
           return Promise.all([
             fs.writeFileSync(path.join(outputDir, "reality.json"), realityJson),
           ]).then(() => Promise.resolve("Reality File Writed"));
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      },
+    },
+    {
+      title: "Scrapping Expert",
+      task: async (ctx) => {
+        try {
+          const expertList = await expert();
+          const expertJson = jsonFormatter(expertList);
+
+          ctx.expert = expertList;
+
+          return Promise.all([
+            fs.writeFileSync(path.join(outputDir, "expert.json"), expertJson),
+          ]).then(() => Promise.resolve("Expert File Writed"));
         } catch (e) {
           return Promise.reject(e);
         }
