@@ -1,5 +1,6 @@
 {
   "origin": "https://billwurtz.com",
   "songs": "/songs.html",
-  "videos": "/videos.html"
+  "videos": "/videos.html",
+  "outputDirectory": "result"
 }
