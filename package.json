@@ -1,0 +1,22 @@
+{
+  "name": "billwurtz-site-scrapper",
+  "version": "1.0.0",
+  "description": "billwurtz web scrapper",
+  "main": "automate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reacto11mecha/billwurtz-site-scrapper.git"
+  },
+  "keywords": [
+    "billwurtz"
+  ],
+  "author": "Ezra Khairan Permana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reacto11mecha/billwurtz-site-scrapper/issues"
+  },
+  "homepage": "https://github.com/reacto11mecha/billwurtz-site-scrapper#readme"
+}
