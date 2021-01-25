@@ -2,5 +2,6 @@
   "origin": "https://billwurtz.com",
   "songs": "/songs.html",
   "videos": "/videos.html",
+  "notebook": "/notebook.html",
   "outputDirectory": "result"
 }
