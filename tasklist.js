@@ -5,6 +5,7 @@ const {
   instrumentals,
   reality,
   expert,
+  lyrics,
 } = require("./scrapper");
 const { jsonFormatter } = require("./utils");
 const Listr = require("listr");
@@ -120,6 +121,23 @@ module.exports = ({ outputDir }) =>
           return Promise.all([
             fs.writeFileSync(path.join(outputDir, "expert.json"), expertJson),
           ]).then(() => Promise.resolve("Expert File Writed"));
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      },
+    },
+    {
+      title: "Scrapping Lyrics",
+      task: async (ctx) => {
+        try {
+          const lyricsList = await lyrics();
+          const lyricsJson = jsonFormatter(lyricsList);
+
+          ctx.lyrics = lyricsList;
+
+          return Promise.all([
+            fs.writeFileSync(path.join(outputDir, "lyrics.json"), lyricsJson),
+          ]).then(() => Promise.resolve("Lyrics File Writed"));
         } catch (e) {
           return Promise.reject(e);
         }
